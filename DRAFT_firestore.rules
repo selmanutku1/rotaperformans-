@@ -1,0 +1,227 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global Safety Net: Default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null && request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isShortMetric(val) {
+      return val is string && val.size() <= 20;
+    }
+
+    function isValidPerformanceTest(data) {
+      return data.keys().hasAll([
+        'ownerId',
+        'testDate',
+        'athleteName',
+        'birthDate',
+        'heightCm',
+        'weightKg',
+        'gripRightKg',
+        'gripLeftKg',
+        'flamingoRight1',
+        'flamingoRight2',
+        'flamingoLeft1',
+        'flamingoLeft2',
+        'sprint20m',
+        'sitAndReachCm',
+        'armSpeedRightSec',
+        'armSpeedLeftSec',
+        'standingLongJumpCm',
+        'shuttleRun10x5Sec',
+        'verticalJumpCm',
+        'reactionTestSec',
+        'skinfoldTricepsMm',
+        'skinfoldBicepsMm',
+        'skinfoldIliacMm',
+        'skinfoldCalfMm',
+        'motherHeightCm',
+        'motherWeightKg',
+        'motherSportsHistory',
+        'fatherHeightCm',
+        'fatherWeightKg',
+        'fatherSportsHistory',
+        'createdAt',
+        'updatedAt'
+      ]) &&
+      data.keys().hasOnly([
+        'ownerId',
+        'testDate',
+        'athleteName',
+        'sportsClub',
+        'birthDate',
+        'heightCm',
+        'weightKg',
+        'gripRightKg',
+        'gripLeftKg',
+        'flamingoRight1',
+        'flamingoRight2',
+        'flamingoLeft1',
+        'flamingoLeft2',
+        'sprint20m',
+        'sitAndReachCm',
+        'armSpeedRightSec',
+        'armSpeedLeftSec',
+        'standingLongJumpCm',
+        'shuttleRun10x5Sec',
+        'verticalJumpCm',
+        'reactionTestSec',
+        'skinfoldTricepsMm',
+        'skinfoldBicepsMm',
+        'skinfoldIliacMm',
+        'skinfoldCalfMm',
+        'motherHeightCm',
+        'motherWeightKg',
+        'motherSportsHistory',
+        'fatherHeightCm',
+        'fatherWeightKg',
+        'fatherSportsHistory',
+        'createdAt',
+        'updatedAt'
+      ]) &&
+      data.ownerId is string && data.ownerId.size() >= 1 && data.ownerId.size() <= 128 && data.ownerId.matches('^[a-zA-Z0-9_\\-]+$') &&
+      data.ownerId == request.auth.uid &&
+      data.testDate is string && data.testDate.size() >= 1 && data.testDate.size() <= 20 && data.testDate.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$') &&
+      data.athleteName is string && data.athleteName.size() >= 1 && data.athleteName.size() <= 120 &&
+      (!('sportsClub' in data) || (data.sportsClub is string && data.sportsClub.size() <= 100)) &&
+      isShortMetric(data.birthDate) &&
+      isShortMetric(data.heightCm) &&
+      isShortMetric(data.weightKg) &&
+      isShortMetric(data.gripRightKg) &&
+      isShortMetric(data.gripLeftKg) &&
+      isShortMetric(data.flamingoRight1) &&
+      isShortMetric(data.flamingoRight2) &&
+      isShortMetric(data.flamingoLeft1) &&
+      isShortMetric(data.flamingoLeft2) &&
+      isShortMetric(data.sprint20m) &&
+      isShortMetric(data.sitAndReachCm) &&
+      isShortMetric(data.armSpeedRightSec) &&
+      isShortMetric(data.armSpeedLeftSec) &&
+      isShortMetric(data.standingLongJumpCm) &&
+      isShortMetric(data.shuttleRun10x5Sec) &&
+      isShortMetric(data.verticalJumpCm) &&
+      isShortMetric(data.reactionTestSec) &&
+      isShortMetric(data.skinfoldTricepsMm) &&
+      isShortMetric(data.skinfoldBicepsMm) &&
+      isShortMetric(data.skinfoldIliacMm) &&
+      isShortMetric(data.skinfoldCalfMm) &&
+      isShortMetric(data.motherHeightCm) &&
+      isShortMetric(data.motherWeightKg) &&
+      data.motherSportsHistory is string && data.motherSportsHistory.size() <= 300 &&
+      isShortMetric(data.fatherHeightCm) &&
+      isShortMetric(data.fatherWeightKg) &&
+      data.fatherSportsHistory is string && data.fatherSportsHistory.size() <= 300 &&
+      data.createdAt is timestamp &&
+      data.updatedAt is timestamp;
+    }
+
+    function isValidSportsClub(data) {
+      return data.keys().hasAll(['ownerId', 'name', 'branch', 'createdAt']) &&
+        data.keys().hasOnly(['ownerId', 'name', 'branch', 'createdAt']) &&
+        data.ownerId is string && data.ownerId.size() >= 1 && data.ownerId.size() <= 128 && data.ownerId.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.ownerId == request.auth.uid &&
+        data.name is string && data.name.size() >= 1 && data.name.size() <= 100 &&
+        data.branch is string && data.branch.size() <= 60 &&
+        data.createdAt is timestamp;
+    }
+
+    function isValidClubAthlete(data) {
+      return data.keys().hasAll(['ownerId', 'clubId', 'sportsClub', 'athleteName', 'birthDate', 'createdAt']) &&
+        data.keys().hasOnly(['ownerId', 'clubId', 'sportsClub', 'athleteName', 'birthDate', 'createdAt']) &&
+        data.ownerId is string && data.ownerId.size() >= 1 && data.ownerId.size() <= 128 && data.ownerId.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.ownerId == request.auth.uid &&
+        data.clubId is string && data.clubId.size() >= 1 && data.clubId.size() <= 128 && data.clubId.matches('^[a-zA-Z0-9_\\-]+$') &&
+        data.sportsClub is string && data.sportsClub.size() >= 1 && data.sportsClub.size() <= 100 &&
+        data.athleteName is string && data.athleteName.size() >= 1 && data.athleteName.size() <= 120 &&
+        data.birthDate is string && data.birthDate.size() <= 20 &&
+        data.createdAt is timestamp;
+    }
+
+    match /performanceTests/{testId} {
+      allow get: if isSignedIn() && isValidId(testId) && existing().ownerId == request.auth.uid;
+      allow list: if isSignedIn() && existing().ownerId == request.auth.uid;
+
+      allow create: if isSignedIn() &&
+        isValidId(testId) &&
+        isValidPerformanceTest(incoming()) &&
+        incoming().createdAt == request.time &&
+        incoming().updatedAt == request.time;
+
+      allow update: if isSignedIn() &&
+        isValidPerformanceTest(incoming()) &&
+        isValidId(testId) &&
+        existing().ownerId == request.auth.uid &&
+        incoming().ownerId == existing().ownerId &&
+        incoming().createdAt == existing().createdAt &&
+        incoming().updatedAt == request.time &&
+        incoming().diff(existing()).affectedKeys().hasOnly([
+          'testDate',
+          'athleteName',
+          'sportsClub',
+          'birthDate',
+          'heightCm',
+          'weightKg',
+          'gripRightKg',
+          'gripLeftKg',
+          'flamingoRight1',
+          'flamingoRight2',
+          'flamingoLeft1',
+          'flamingoLeft2',
+          'sprint20m',
+          'sitAndReachCm',
+          'armSpeedRightSec',
+          'armSpeedLeftSec',
+          'standingLongJumpCm',
+          'shuttleRun10x5Sec',
+          'verticalJumpCm',
+          'reactionTestSec',
+          'skinfoldTricepsMm',
+          'skinfoldBicepsMm',
+          'skinfoldIliacMm',
+          'skinfoldCalfMm',
+          'motherHeightCm',
+          'motherWeightKg',
+          'motherSportsHistory',
+          'fatherHeightCm',
+          'fatherWeightKg',
+          'fatherSportsHistory',
+          'updatedAt'
+        ]);
+
+      allow delete: if isSignedIn() && isValidId(testId) && existing().ownerId == request.auth.uid;
+    }
+
+    match /sportsClubs/{clubId} {
+      allow get: if isSignedIn() && isValidId(clubId) && existing().ownerId == request.auth.uid;
+      allow list: if isSignedIn() && existing().ownerId == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(clubId) && isValidSportsClub(incoming()) && incoming().createdAt == request.time;
+      allow update: if isSignedIn() && isValidSportsClub(incoming()) && isValidId(clubId) && existing().ownerId == request.auth.uid && incoming().ownerId == existing().ownerId && incoming().createdAt == existing().createdAt && incoming().diff(existing()).affectedKeys().hasOnly(['name', 'branch']);
+      allow delete: if isSignedIn() && isValidId(clubId) && existing().ownerId == request.auth.uid;
+    }
+
+    match /clubAthletes/{athleteId} {
+      allow get: if isSignedIn() && isValidId(athleteId) && existing().ownerId == request.auth.uid;
+      allow list: if isSignedIn() && existing().ownerId == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(athleteId) && isValidClubAthlete(incoming()) && incoming().createdAt == request.time;
+      allow update: if isSignedIn() && isValidClubAthlete(incoming()) && isValidId(athleteId) && existing().ownerId == request.auth.uid && incoming().ownerId == existing().ownerId && incoming().createdAt == existing().createdAt && incoming().diff(existing()).affectedKeys().hasOnly(['athleteName', 'birthDate', 'sportsClub', 'clubId']);
+      allow delete: if isSignedIn() && isValidId(athleteId) && existing().ownerId == request.auth.uid;
+    }
+  }
+}

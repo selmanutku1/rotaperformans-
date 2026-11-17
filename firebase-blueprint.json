@@ -1,0 +1,308 @@
+{
+  "entities": {
+    "PerformanceTest": {
+      "title": "PerformanceTest",
+      "description": "ROTA Performans sporcu performans test formu kaydı.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "description": "Kaydı oluşturan kullanıcının Firebase Auth UID değeri.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "testDate": {
+          "type": "string",
+          "description": "Test Tarihi (YYYY-MM-DD).",
+          "minLength": 1,
+          "maxLength": 20,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "athleteName": {
+          "type": "string",
+          "description": "Sporcu Adı Soyadı.",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "sportsClub": {
+          "type": "string",
+          "description": "Sporcunun kayıtlı olduğu Spor Kulübü.",
+          "maxLength": 100
+        },
+        "birthDate": {
+          "type": "string",
+          "description": "Doğum Tarihi (YYYY-MM-DD veya boş).",
+          "maxLength": 20
+        },
+        "heightCm": {
+          "type": "string",
+          "description": "Boy (cm).",
+          "maxLength": 20
+        },
+        "weightKg": {
+          "type": "string",
+          "description": "Ağırlık (kg).",
+          "maxLength": 20
+        },
+        "gripRightKg": {
+          "type": "string",
+          "description": "Pençe Kuvveti Sağ (kg).",
+          "maxLength": 20
+        },
+        "gripLeftKg": {
+          "type": "string",
+          "description": "Pençe Kuvveti Sol (kg).",
+          "maxLength": 20
+        },
+        "flamingoRight1": {
+          "type": "string",
+          "description": "Flamingo Denge Sağ 1. Deneme (sn).",
+          "maxLength": 20
+        },
+        "flamingoRight2": {
+          "type": "string",
+          "description": "Flamingo Denge Sağ 2. Deneme (sn).",
+          "maxLength": 20
+        },
+        "flamingoLeft1": {
+          "type": "string",
+          "description": "Flamingo Denge Sol 1. Deneme (sn).",
+          "maxLength": 20
+        },
+        "flamingoLeft2": {
+          "type": "string",
+          "description": "Flamingo Denge Sol 2. Deneme (sn).",
+          "maxLength": 20
+        },
+        "sprint20m": {
+          "type": "string",
+          "description": "20M Sprint (sn).",
+          "maxLength": 20
+        },
+        "sitAndReachCm": {
+          "type": "string",
+          "description": "Esneklik Otur Eriş (cm).",
+          "maxLength": 20
+        },
+        "armSpeedRightSec": {
+          "type": "string",
+          "description": "Kol Sürat Sağ (sn).",
+          "maxLength": 20
+        },
+        "armSpeedLeftSec": {
+          "type": "string",
+          "description": "Kol Sürat Sol (sn).",
+          "maxLength": 20
+        },
+        "standingLongJumpCm": {
+          "type": "string",
+          "description": "Durarak Uzun Atlama (cm).",
+          "maxLength": 20
+        },
+        "shuttleRun10x5Sec": {
+          "type": "string",
+          "description": "10x5 Sürat (sn).",
+          "maxLength": 20
+        },
+        "verticalJumpCm": {
+          "type": "string",
+          "description": "Dikey Sıçrama (cm).",
+          "maxLength": 20
+        },
+        "reactionTestSec": {
+          "type": "string",
+          "description": "Reaksiyon Testi (sn).",
+          "maxLength": 20
+        },
+        "skinfoldTricepsMm": {
+          "type": "string",
+          "description": "Deri Kıvrım Kalınlığı Triceps (mm).",
+          "maxLength": 20
+        },
+        "skinfoldBicepsMm": {
+          "type": "string",
+          "description": "Deri Kıvrım Kalınlığı Biceps (mm).",
+          "maxLength": 20
+        },
+        "skinfoldIliacMm": {
+          "type": "string",
+          "description": "Deri Kıvrım Kalınlığı Iliac (mm).",
+          "maxLength": 20
+        },
+        "skinfoldCalfMm": {
+          "type": "string",
+          "description": "Deri Kıvrım Kalınlığı Calf (mm).",
+          "maxLength": 20
+        },
+        "motherHeightCm": {
+          "type": "string",
+          "description": "Anne Boy (cm).",
+          "maxLength": 20
+        },
+        "motherWeightKg": {
+          "type": "string",
+          "description": "Anne Kilo (kg).",
+          "maxLength": 20
+        },
+        "motherSportsHistory": {
+          "type": "string",
+          "description": "Anne Spor Geçmişi.",
+          "maxLength": 300
+        },
+        "fatherHeightCm": {
+          "type": "string",
+          "description": "Baba Boy (cm).",
+          "maxLength": 20
+        },
+        "fatherWeightKg": {
+          "type": "string",
+          "description": "Baba Kilo (kg).",
+          "maxLength": 20
+        },
+        "fatherSportsHistory": {
+          "type": "string",
+          "description": "Baba Spor Geçmişi.",
+          "maxLength": 300
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Oluşturulma zamanı (Server Timestamp)."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Son güncellenme zamanı (Server Timestamp)."
+        }
+      },
+      "required": [
+        "ownerId",
+        "testDate",
+        "athleteName",
+        "sportsClub",
+        "birthDate",
+        "heightCm",
+        "weightKg",
+        "gripRightKg",
+        "gripLeftKg",
+        "flamingoRight1",
+        "flamingoRight2",
+        "flamingoLeft1",
+        "flamingoLeft2",
+        "sprint20m",
+        "sitAndReachCm",
+        "armSpeedRightSec",
+        "armSpeedLeftSec",
+        "standingLongJumpCm",
+        "shuttleRun10x5Sec",
+        "verticalJumpCm",
+        "reactionTestSec",
+        "skinfoldTricepsMm",
+        "skinfoldBicepsMm",
+        "skinfoldIliacMm",
+        "skinfoldCalfMm",
+        "motherHeightCm",
+        "motherWeightKg",
+        "motherSportsHistory",
+        "fatherHeightCm",
+        "fatherWeightKg",
+        "fatherSportsHistory",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "SportsClub": {
+      "title": "SportsClub",
+      "description": "ROTA Performans sistemine kayıtlı spor kulübü.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "branch": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["ownerId", "name", "branch", "createdAt"]
+    },
+    "ClubAthlete": {
+      "title": "ClubAthlete",
+      "description": "Bir spor kulübüne tanımlı sporcu profili.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "clubId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "sportsClub": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "athleteName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "birthDate": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "ownerId",
+        "clubId",
+        "sportsClub",
+        "athleteName",
+        "birthDate",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/performanceTests/{testId}": {
+      "schema": {
+        "$ref": "#/entities/PerformanceTest"
+      },
+      "description": "ROTA Performans sporcu test kayıtları koleksiyonu."
+    },
+    "/sportsClubs/{clubId}": {
+      "schema": {
+        "$ref": "#/entities/SportsClub"
+      },
+      "description": "Kayıtlı spor kulüpleri koleksiyonu."
+    },
+    "/clubAthletes/{athleteId}": {
+      "schema": {
+        "$ref": "#/entities/ClubAthlete"
+      },
+      "description": "Spor kulüplerine kayıtlı sporcular koleksiyonu."
+    }
+  }
+}

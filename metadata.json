@@ -1,0 +1,6 @@
+{
+  "name": "ROTA Performans - Dijital Test Formu",
+  "description": "ROTA Performans sporcu fiziksel ölçüm ve performans test formu verilerini dijital ortamda kaydedin, görüntüleyin, düzenleyin ve A4 PDF olarak yazdırın.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

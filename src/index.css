@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans) !important;
+    background-color: #F0F6FC;
+    color: #0B192C;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font-family: var(--font-sans) !important;
+  }
+
+  input[type="date"]::-webkit-datetime-edit,
+  input[type="date"]::-webkit-datetime-edit-fields-wrapper,
+  input[type="date"]::-webkit-datetime-edit-text,
+  input[type="date"]::-webkit-datetime-edit-month-field,
+  input[type="date"]::-webkit-datetime-edit-day-field,
+  input[type="date"]::-webkit-datetime-edit-year-field {
+    font-family: var(--font-sans) !important;
+  }
+}
+
+.font-display {
+  font-family: var(--font-sans) !important;
+}
+
+.font-mono-tabular {
+  font-family: var(--font-sans) !important;
+}
+
+/* Print Stylesheet: Only the ROTA Performans Test Form is visible when printing */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  body {
+    background: #FFFFFF !important;
+    color: #0B192C !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only-sheet {
+    display: block !important;
+    box-shadow: none !important;
+    border: 2px solid #0B192C !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .print-compact-gap {
+    gap: 8px !important;
+  }
+
+  .print-compact-pad {
+    padding: 10px 14px !important;
+  }
+}
