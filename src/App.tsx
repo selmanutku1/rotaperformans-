@@ -2634,31 +2634,6 @@ function RotaPerformansApp() {
             {!isCollapsed && <span className="truncate">Excel</span>}
           </button>
 
-          {/* Action: Webhook Otomatik Veri Aktarımı */}
-          <button
-            type="button"
-            onClick={() => {
-              setWebhookModalOpen(true);
-              setMobileDrawerOpen(false);
-            }}
-            title="Webhook Otomatik Veri Aktarımı"
-            className={`w-full min-h-[42px] flex items-center ${
-              isCollapsed ? 'justify-center px-2' : 'justify-between px-3.5'
-            } rounded-xl text-sm font-medium transition-colors cursor-pointer ${
-              webhookAutoSend && webhookTargetUrl.trim()
-                ? 'bg-[#0F294A] text-[#38BDF8] border border-[#00B4D8]/30'
-                : 'text-slate-300 hover:bg-white/5 hover:text-white'
-            }`}
-          >
-            <div className="flex items-center gap-3 min-w-0">
-              <Webhook className="w-4 h-4 shrink-0 text-[#38BDF8]" />
-              {!isCollapsed && <span className="truncate">Webhook</span>}
-            </div>
-            {!isCollapsed && webhookAutoSend && webhookTargetUrl.trim() && (
-              <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
-            )}
-          </button>
-
           {/* Action: Tam Ekran Modu (Desktop Only) */}
           {!isMobileDrawer && (
             <button
